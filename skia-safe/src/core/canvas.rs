@@ -17,9 +17,8 @@ use crate::{Arc, ColorSpace};
 use crate::{
     Bitmap, BlendMode, Blender, ClipOp, Color, Color4f, Data, Drawable, FilterMode, Font, GlyphId,
     IPoint, IRect, ISize, Image, ImageFilter, ImageInfo, M44, Matrix, Mesh, Paint, Path, Picture,
-    Pixmap, Point,
-    QuickReject, RRect, RSXform, Rect, Region, SamplingOptions, Shader, Surface, SurfaceProps,
-    TextBlob, TextEncoding, TileMode, Vector, Vertices, prelude::*, scalar,
+    Pixmap, Point, QuickReject, RRect, RSXform, Rect, Region, SamplingOptions, Shader, Surface,
+    SurfaceProps, TextBlob, TextEncoding, TileMode, Vector, Vertices, prelude::*, scalar,
 };
 
 pub use lattice::Lattice;

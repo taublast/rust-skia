@@ -366,8 +366,8 @@ fn main() {
             .iter()
             .flat_map(|i| i.to_ne_bytes())
             .collect();
-        let index_buffer = gpu::meshes::make_index_buffer(&mut gr_context, &indices)
-            .expect("GPU index buffer");
+        let index_buffer =
+            gpu::meshes::make_index_buffer(&mut gr_context, &indices).expect("GPU index buffer");
 
         let children = [ChildPtr::from(shaders::color(Color::from_rgb(
             128, 255, 255,
@@ -412,7 +412,9 @@ fn main() {
             Blender::mode(BlendMode::Dst),
             &blue,
         );
-        gr_context.flush_and_submit().expect("flush the buffer update");
+        gr_context
+            .flush_and_submit()
+            .expect("flush the buffer update");
 
         // Move the quad to the right, and draw it with the paint color only (`Src`).
         assert!(vertex_buffer.update(&mut gr_context, &color_quad_vertices(right_quad), 0));
@@ -474,7 +476,11 @@ fn main() {
     ] {
         expect("uv quad", (x, y), uv_color(x, y));
     }
-    expect("left of the uv quad", (quad.left - 8.0, quad.center_y()), black);
+    expect(
+        "left of the uv quad",
+        (quad.left - 8.0, quad.center_y()),
+        black,
+    );
 
     // At the center column of the strip the displacement is `sin(x * uFreq + uTime) * uAmp`.
     let x = wave.center_x();
@@ -492,7 +498,11 @@ fn main() {
     let y = wave.top - 8.0;
     expect("wave above its undisplaced top", (x, y), wave_color(y));
     // Inside of the undisplaced strip, but below the displaced one.
-    expect("wave below its displaced bottom", (x, wave.bottom - 5.0), black);
+    expect(
+        "wave below its displaced bottom",
+        (x, wave.bottom - 5.0),
+        black,
+    );
 
     // (255, 128, 0) * (128, 255, 255) * (1, 0.5, 1)
     expect(
@@ -536,9 +546,12 @@ fn main() {
         }
     );
 
-    let path = std::env::args().nth(1).map(PathBuf::from).unwrap_or_else(|| {
-        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../target/mesh-example.png")
-    });
+    let path = std::env::args()
+        .nth(1)
+        .map(PathBuf::from)
+        .unwrap_or_else(|| {
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../target/mesh-example.png")
+        });
     let png = bitmap
         .encode(EncodedImageFormat::PNG, None)
         .expect("PNG encoding failed");

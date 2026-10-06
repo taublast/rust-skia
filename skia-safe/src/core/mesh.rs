@@ -768,8 +768,7 @@ mod tests {
         assert_eq!(clone.index_buffer().unwrap().size(), 12);
 
         // More vertices than the buffer holds.
-        let error =
-            Mesh::make(&spec, Mode::Triangles, &vb, 6, 0, None, &[], bounds).unwrap_err();
+        let error = Mesh::make(&spec, Mode::Triangles, &vb, 6, 0, None, &[], bounds).unwrap_err();
         assert!(!error.is_empty());
     }
 
@@ -791,7 +790,16 @@ mod tests {
         let uniforms = Data::new_copy(&f32_bytes(&[1.0; 4]));
 
         let make = |uniforms: Option<Data>, children: &[ChildPtr]| {
-            Mesh::make(&spec, Mode::Triangles, &vb, 3, 0, uniforms, children, bounds)
+            Mesh::make(
+                &spec,
+                Mode::Triangles,
+                &vb,
+                3,
+                0,
+                uniforms,
+                children,
+                bounds,
+            )
         };
 
         let error = make(None, &children).unwrap_err();
